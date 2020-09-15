@@ -1,7 +1,8 @@
-
 from lib.float_to_str import float_to_str
+from lib.is_sorted import is_sorted
 
 from lib.sort_data import random_ints
+from lib.sort_data import random_ints_negetive
 from lib.sort_data import random_floats
 from lib.sort_data import random_letters
 

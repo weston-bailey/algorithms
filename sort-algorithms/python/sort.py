@@ -10,11 +10,12 @@ functions = [
   bubble_sort_recursive,
   insertion_sort,
   # insertion_sort_recursive,
-  bucket_sort
+  bucket_sort,
+  merge_sort
 ]
 
 # the data to sort
-data = random_floats(1000, 1)
+data = random_ints(100)
 # k value for bucket sort
 num_buckets = math.floor((len(data) * .5))
 
@@ -48,12 +49,16 @@ for i in range(len(functions)):
   times.append(float(proccess_time))
   names.append(call.__name__)
 
+  sort_test = 'List is sorted' if is_sorted(sort) else 'List is not sorted'
+
+  print(f'{sort_test} {call.__name__} completed in {proccess_time} seconds')
+
   if verbose: 
-    print(f'{call.__name__} completed in {proccess_time} seconds:\n{sort}')
-  else:
-    print(f'{call.__name__} {proccess_time}')
+    print(sort)
+
 
 if plot:
   plt.figure(figsize=(13, 8))
   plt.bar(names, times)
   plt.show()
+

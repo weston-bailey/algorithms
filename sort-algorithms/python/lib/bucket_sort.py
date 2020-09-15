@@ -2,6 +2,7 @@ import math
 from lib.insertion_sort import insertion_sort
 
 # accepts an unsorted list and the number of buckets to use (k)
+# only works with positive vales
 def bucket_sort(unsorted_list, num_buckets):
   # make the buckets
   buckets = []
@@ -9,6 +10,8 @@ def bucket_sort(unsorted_list, num_buckets):
 
   # calculate the size of each bucket
   highest = max(unsorted_list)
+  # find distance between highest and loweest value for negetive values
+  # distance = abs(max(unsorted_list) - min(unsorted_list))
 
   # place elements in buckets
   for i in range(len(unsorted_list)):
