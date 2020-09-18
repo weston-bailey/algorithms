@@ -11,11 +11,13 @@ functions = [
   insertion_sort,
   # insertion_sort_recursive,
   bucket_sort,
-  merge_sort
+  heap_sort,
+  merge_sort,
+  quick_sort
 ]
 
 # the data to sort
-data = random_ints(100)
+data = random_ints(100000)
 # k value for bucket sort
 num_buckets = math.floor((len(data) * .5))
 
