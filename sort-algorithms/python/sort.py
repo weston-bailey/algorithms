@@ -17,7 +17,7 @@ functions = [
 ]
 
 # the data to sort
-data = random_ints(1000)
+data = random_ints(10)
 # k value for bucket sort
 num_buckets = math.floor((len(data) * .5))
 
@@ -26,9 +26,9 @@ if len(data) >= 1000:
   sys.setrecursionlimit(len(data) + 1)
 
 # print lists in console
-verbose = False
+verbose = True
 # plot the times after completion
-plot = True
+plot = False
 
 if verbose: print(f'unsorted list:\n{data}')
 

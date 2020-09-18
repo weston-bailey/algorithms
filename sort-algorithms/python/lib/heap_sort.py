@@ -1,20 +1,22 @@
 def heap_sort(unsorted_list):
   length = len(unsorted_list)
+
   build_heap(unsorted_list, length)
-  if length > 1:
-    for i in range(length - 1, 0, -1):
-      unsorted_list[0], unsorted_list[i] = unsorted_list[i], unsorted_list[0]
-      heapify(unsorted_list, i, 0)
+
+  for i in range(length - 1, 0, -1):
+    unsorted_list[0], unsorted_list[i] = unsorted_list[i], unsorted_list[0]
+
+    heapify(unsorted_list, i, 0)
 
   return unsorted_list
   
 
 def build_heap(unsorted_list, length):
   for i in range(length // 2, -1, -1):
-    heapify(unsorted_list, i, 0)
+    heapify(unsorted_list, length, i)
 
 def heapify(unsorted_list, size, root_index):
-  largest = size
+  largest = root_index
   left = 2 * root_index + 1
   right = 2 * root_index + 2
 
