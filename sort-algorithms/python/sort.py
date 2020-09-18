@@ -9,7 +9,7 @@ functions = [
   bubble_sort,
   bubble_sort_recursive,
   insertion_sort,
-  # insertion_sort_recursive,
+  insertion_sort_recursive,
   bucket_sort,
   heap_sort,
   merge_sort,
@@ -17,7 +17,7 @@ functions = [
 ]
 
 # the data to sort
-data = random_ints(100000)
+data = random_ints(1000)
 # k value for bucket sort
 num_buckets = math.floor((len(data) * .5))
 
