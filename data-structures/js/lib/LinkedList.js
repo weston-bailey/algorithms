@@ -34,7 +34,7 @@ export default class LinkedList {
     if(this.isEmpty()) console.log(null)
 
     for(let i = start; i < stop; i++ ){
-      let currentNode = this.get(i)
+      let currentNode = this.get(i);
       console.log(currentNode)
     }
   }
@@ -73,14 +73,34 @@ export default class LinkedList {
 
   // add value to end of list
   push(value) {
+    //  make a new node
     const newNode = new Node(value)
 
+    // populate head and tail if list if empty
     if(this.isEmpty()){
       this.head = newNode;
       this.tail = newNode;
+    // set the tail's next to the new node and place the new node at the tail
     } else {
       this.tail.next = newNode;
       this.tail = newNode;
+    }
+    this.size++
+  }
+
+  // add a node to the beginning of the list
+  append(value) {
+    // make a new node
+    const newNode = new Node(value);
+
+    // update head and tail if list if empty
+    if(this.isEmpty()){
+      this.head = newNode;
+      this.tail = newNode;
+    // asiign head to the next of the new node and place the new node at the head
+    } else {
+      newNode.next = this.head;
+      this.head = newNode
     }
     this.size++
   }
@@ -142,7 +162,7 @@ export default class LinkedList {
     // find the node right before the one we want to remove
     let currentNode = this.get(index - 1);
     // return if no node was found (likely a bad index)
-    if(currentNode.next === null) return null;
+    if(currentNode === null) return null;
     // grab the next node to return it after removal
     removed = currentNode.next;
     // if we are at the end of the list, update the tail accordingly
@@ -158,6 +178,35 @@ export default class LinkedList {
     // return the node that was removed 
     return removed;
   } 
+
+  // replace a value at an index
+  replace(index, value) {
+    // if list is empty return with an error
+    if(this.isEmpty()) return console.error('list is empty');
+    // make a new node
+    const newNode = new Node(value);
+
+    // handle case if the index is the head 
+    if(index === 0) {
+     newNode.next = this.head.next;
+     this.head = newNode;
+     return
+    }
+
+    // find the node before the index
+    let currentNode = this.get(index - 1);
+    // return if no node at that index is found
+    if(currentNode === null) return null;
+    // if we are at the end of the list, update the tail
+    if(this.size === index) {
+      currentNode.next = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = currentNode.next.next;
+      currentNode.next = newNode;
+    }
+    return
+  }
 
   // returns middle value of list
   middle() {
