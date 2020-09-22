@@ -17,7 +17,7 @@ functions = [
 ]
 
 # the data to sort
-data = random_ints(1000)
+data = random_floats(10000)
 # k value for bucket sort
 num_buckets = math.floor((len(data) * .5))
 
