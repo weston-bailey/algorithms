@@ -225,6 +225,51 @@ module.exports = class SingleLinkedList {
     return
   }
 
+  // removes all nodes of the list and returns the count of nodes nullified
+  clear() {
+    if(this.isEmpty()) return 0;
+    // how many nodes have been removed
+    let inc = 0;
+
+    return this.forEachNode( (currentNode) => {
+      this.shift();
+      inc++
+      return inc;
+    })
+  }
+
+  // returns first found index of value
+  find(value) {
+    if(this.isEmpty()) return null;
+
+    let currentNode = this.head;
+    let i = 0;
+    while(currentNode != null) {
+      if(currentNode.value === value) break;
+      currentNode = currentNode.next;
+      i++
+    }
+    // if current node is null, we reached the end without finding the value
+    return currentNode ? i : null;
+  }
+
+  // returns and array of all indexes with value
+  findAll(value) {
+    if(this.isEmpty()) return null;
+    let indexes = []
+    this.forEachNode( (currentNode, index) => {
+      if(currentNode.value === value) return indexes.push(index);
+    }, indexes)
+
+    return indexes.length ? indexes : null;
+  }
+
+  // returns the last found index of supplied value
+  findLast(value) {
+    let all = this.findAll(value);
+    return all ? all[all.length - 1] : null;
+  }
+  
   // concatenate multiple lists and return a new list (doesn't have to include self)
   concat(...args) {
     let newList = new SingleLinkedList();
@@ -251,17 +296,13 @@ module.exports = class SingleLinkedList {
     // maximum boundaries possible
     let min = Number.POSITIVE_INFINITY
     let max = Number.NEGATIVE_INFINITY
-    
-    let currentNode = this.head;
-    let i = 0;
-    while(i < this.size) {
+
+    return [min, max] = this.forEachNode( (currentNode) => {
       if(currentNode.value < min) min = currentNode.value;
       if(currentNode.value > max) max = currentNode.value;
-      currentNode = currentNode.next;
-      i++ 
-    }
-
-    return [min, max]
+      return [min, max]
+    }, min, max)
+    
   }
 
   /* // // // // // // // // // //
