@@ -1,8 +1,8 @@
-import LinkedList from './lib/LinkedList.js';
+const ll = require('./lib/LinkedList')
 
-let newList0 = new LinkedList();
-let newList1 = new LinkedList();
-let newList2 = new LinkedList();
+let newList0 = new ll.SingleLinkedList();
+let newList1 = new ll.SingleLinkedList();
+let newList2 = new ll.SingleLinkedList();
 
 for(let i = 0; i < 10; i++) {
   newList0.push(i)
@@ -19,7 +19,3 @@ concatList.log()
 console.log('~~~~~~~~~~~~~~~')
 
 console.log(concatList.bounds())
-
-
-
-// console.log(newList.get(12))
