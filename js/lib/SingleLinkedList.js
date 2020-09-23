@@ -3,8 +3,8 @@
 // a list node
 class Node {
   constructor(value) {
-    this.value = value
-    this.next = null
+    this.value = value;
+    this.next = null;
   }
 }
 
@@ -16,6 +16,10 @@ module.exports = class SingleLinkedList {
     this.size = 0;
   }
 
+  /* // // // // // // // // // //
+  UTILITY METHODS
+  */ // // // // // // // // // // 
+
   // just for fun
   toString() {
     return `[object ${this.constructor.name}]`
@@ -26,9 +30,27 @@ module.exports = class SingleLinkedList {
     return this.size === 0;
   }
 
-  // return how many nodes there are
+  // executes a callback function on each Node in the list with arguments index and currentNode and supplied args
+  forEachNode(callback, ...args) {
+    if(typeof callback != 'function') return console.error('supplied argument to forEachNode() must be a function');
+
+    let callbackReturn;
+    let currentNode = this.head;
+    let i = 0;
+    while(currentNode != null) {
+      callbackReturn = callback(currentNode, i, ...args);
+      currentNode = currentNode.next;
+      i++
+    }
+  
+    return callbackReturn;
+  }
+
+  // calculate how many nodes there are in a list
   length() {
-    return this.size;
+    return this.forEachNode( (currentNode, i) => {
+      return i;
+    });
   }
 
   // print list with optional start and stop nodes, no return
@@ -36,15 +58,20 @@ module.exports = class SingleLinkedList {
     let start = beg || 0;
     let stop = end || this.size;
 
-    if(this.isEmpty()) console.log(null)
+    if(this.isEmpty()) console.log(null);
 
-    for(let i = start; i < stop; i++ ){
-      let currentNode = this.get(i);
-      console.log(currentNode)
-    }
+    this.forEachNode( (currentNode, i) => {
+      if(i >= start && i <= stop){
+        console.log(i, currentNode)
+      }
+    }, start, stop)
   }
 
-  //returns value at index
+  /* // // // // // // // // // //
+  OPERATION METHODS
+  */ // // // // // // // // // //   
+
+  //returns node at index
   get(index){
     // add check for empty list, if true, return null
     if(this.isEmpty()) return null;
@@ -60,15 +87,15 @@ module.exports = class SingleLinkedList {
     }
 
     // if index == lenght - 1, node.tail
-    if(index === this.size - 1) {
+    if(index === this.size) {
       return this.tail
     }
 
     // we want a node anywhere in the list minus head or tail
     let currentNode = this.head
-    let iterator = 0
-    while (iterator < index) {
-      iterator++
+    let i = 1
+    while (i < index) {
+      i++
       currentNode = currentNode.next
     }
     
@@ -150,34 +177,19 @@ module.exports = class SingleLinkedList {
     // return immediately is list is empty
     if(this.isEmpty()) return null;
     // node removed from list for return
+    
+    // in case we are removing the head or tail
+    if(index === 0) return this.shift();
+    if(index === this.size) return this.pop();
+    
     let removed;
-
-    // in case we are removing the head
-    if(index === 0) {
-      // grab the node to be returned
-      removed = this.head;
-      // set head to next 
-      this.head = this.head.next;
-      // decrement size
-      this.size--;
-      if(this.isEmpty()) this.tail = null;
-      return removed;
-    }
-
     // find the node right before the one we want to remove
     let currentNode = this.get(index - 1);
     // return if no node was found (likely a bad index)
     if(currentNode === null) return null;
     // grab the next node to return it after removal
     removed = currentNode.next;
-    // if we are at the end of the list, update the tail accordingly
-    if(this.size === index) {
-      currentNode.next = null;
-      this.tail = currentNode;
-      // otherwise move the next pointer 
-    } else {
-      currentNode.next = currentNode.next.next;
-    }
+    currentNode.next = currentNode.next.next;
     // decrement list size
     this.size--;
     // return the node that was removed 
@@ -213,17 +225,6 @@ module.exports = class SingleLinkedList {
     return
   }
 
-  // returns middle value of list
-  middle() {
-    let index = this.size - 1 
-    if(index % 2 === 0) {
-      // size is even
-      return this.get(Math.floor(index * .5))
-    }
-    // size is odd
-    return this.get((index * .5) + 1) 
-  }
-
   // concatenate multiple lists and return a new list (doesn't have to include self)
   concat(...args) {
     let newList = new SingleLinkedList();
@@ -235,7 +236,7 @@ module.exports = class SingleLinkedList {
       // iterate over current list and push it to new list
       let currentNode = args[i].head
       let j = 0;
-      while(j < args[i].length()){
+      while(j < args[i].size){
         newList.push(currentNode.value)
         currentNode = currentNode.next;
         j++;
@@ -248,22 +249,34 @@ module.exports = class SingleLinkedList {
   bounds() {
     if(this.isEmpty()) return null;
     // maximum boundaries possible
-    let min = new Node(Number.POSITIVE_INFINITY);
-    let max = new Node(Number.NEGATIVE_INFINITY);
-
+    let min = Number.POSITIVE_INFINITY
+    let max = Number.NEGATIVE_INFINITY
+    
     let currentNode = this.head;
-    let iterator = 0;
-    while(iterator < this.size) {
-      if(currentNode.value < min.value) min.value = currentNode.value;
-      console.log(currentNode.value, min.value)
-      if(currentNode.value > max.value) max.value = currentNode.value;
+    let i = 0;
+    while(i < this.size) {
+      if(currentNode.value < min) min = currentNode.value;
+      if(currentNode.value > max) max = currentNode.value;
       currentNode = currentNode.next;
-      iterator++ 
+      i++ 
     }
-    let bounds = new SingleLinkedList()
-    bounds.push(min.value)
-    bounds.push(max.value)
-    return bounds
+
+    return [min, max]
+  }
+
+  /* // // // // // // // // // //
+  CHALLENGE SOLUTION METHODS
+  */ // // // // // // // // // // 
+
+  // returns the value at the middle index of the list
+  middle() {
+    let index = this.size - 1 
+    if(index % 2 === 0) {
+      // size is even
+      return this.get(Math.floor(index * .5))
+    }
+    // size is odd
+    return this.get((index * .5) + 1) 
   }
 }
 
