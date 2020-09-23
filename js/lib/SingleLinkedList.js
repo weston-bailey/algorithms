@@ -9,7 +9,7 @@ class Node {
 }
 
 // linked list datatype
-export default class LinkedList {
+module.exports = class SingleLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
@@ -226,11 +226,11 @@ export default class LinkedList {
 
   // concatenate multiple lists and return a new list (doesn't have to include self)
   concat(...args) {
-    let newList = new LinkedList();
+    let newList = new SingleLinkedList();
 
     // make sure arguments are all lists and add up the total length
     for(let i = 0; i < args.length; i++){
-      if(args[i].toString() != '[object LinkedList]') return console.error('arguments must be of type LinkedList');
+      if(args[i].toString() != '[object SingleLinkedList]') return console.error('arguments must be of type SingleLinkedList');
 
       // iterate over current list and push it to new list
       let currentNode = args[i].head
@@ -260,14 +260,11 @@ export default class LinkedList {
       currentNode = currentNode.next;
       iterator++ 
     }
-    let bounds = new LinkedList()
+    let bounds = new SingleLinkedList()
     bounds.push(min.value)
     bounds.push(max.value)
     return bounds
   }
 }
-
-
-
 
 
