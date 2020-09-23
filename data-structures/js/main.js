@@ -1,35 +1,25 @@
 import LinkedList from './lib/LinkedList.js';
 
-let newList = new LinkedList();
+let newList0 = new LinkedList();
+let newList1 = new LinkedList();
+let newList2 = new LinkedList();
 
 for(let i = 0; i < 10; i++) {
-  newList.push(`my value is ${i}`)
+  newList0.push(i)
+}
+for(let i = 0; i < 10; i++) {
+  newList1.push(i)
+}
+for(let i = 10; i > 0; i--) {
+  newList2.push(i)
 }
 
-
-
-newList.log()
-
-// for(let i = 0; i < 45; i++) {
-//   console.log(newList.shift())
-// }
-
-// newList.push(35)
-
-// newList.log(33, 36)
-
-
-// console.log('removed node', newList.remove(1));
-
+let concatList = newList0.concat(newList0, newList1, newList2)
+concatList.log()
 console.log('~~~~~~~~~~~~~~~')
 
-for(let i = 0; i < 30; i++) {
-  newList.replace(i, i * i);
-}
+console.log(concatList.bounds())
 
 
-newList.log()
-
-// newList.log()
 
 // console.log(newList.get(12))

@@ -16,6 +16,11 @@ export default class LinkedList {
     this.size = 0;
   }
 
+  // just for fun
+  toString() {
+    return `[object ${this.constructor.name}]`
+  }
+
   // can be checked to see if list is empty 
   isEmpty() {
     return this.size === 0;
@@ -218,7 +223,51 @@ export default class LinkedList {
     // size is odd
     return this.get((index * .5) + 1) 
   }
+
+  // concatenate multiple lists and return a new list (doesn't have to include self)
+  concat(...args) {
+    let newList = new LinkedList();
+
+    // make sure arguments are all lists and add up the total length
+    for(let i = 0; i < args.length; i++){
+      if(args[i].toString() != '[object LinkedList]') return console.error('arguments must be of type LinkedList');
+
+      // iterate over current list and push it to new list
+      let currentNode = args[i].head
+      let j = 0;
+      while(j < args[i].length()){
+        newList.push(currentNode.value)
+        currentNode = currentNode.next;
+        j++;
+      }
+    }
+    return newList
+  }
+
+  // returns the highest and lowest values found in the list...only for number values presently
+  bounds() {
+    if(this.isEmpty()) return null;
+    // maximum boundaries possible
+    let min = new Node(Number.POSITIVE_INFINITY);
+    let max = new Node(Number.NEGATIVE_INFINITY);
+
+    let currentNode = this.head;
+    let iterator = 0;
+    while(iterator < this.size) {
+      if(currentNode.value < min.value) min.value = currentNode.value;
+      console.log(currentNode.value, min.value)
+      if(currentNode.value > max.value) max.value = currentNode.value;
+      currentNode = currentNode.next;
+      iterator++ 
+    }
+    let bounds = new LinkedList()
+    bounds.push(min.value)
+    bounds.push(max.value)
+    return bounds
+  }
 }
+
+
 
 
 
