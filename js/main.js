@@ -1,21 +1,25 @@
-const ll = require('./lib/LinkedList')
+import { LinkedList } from 'lib' 
 
-let newList0 = new ll.SingleLinkedList();
-let newList1 = new ll.SingleLinkedList();
-let newList2 = new ll.SingleLinkedList();
+console.log(LinkedList)
 
-for(let i = 0; i < 10; i++) {
-  newList0.push(i)
+let newList0 = new LinkedList.Single()
+let newList1 = new LinkedList.Single()
+
+
+for(let i = 0; i < 1000; i++) {
+  newList0.push(i % 10)
 }
+
 for(let i = 0; i < 10; i++) {
   newList1.push(i)
 }
-for(let i = 10; i > 0; i--) {
-  newList2.push(i)
-}
 
-let concatList = newList0.concat(newList0, newList1, newList2)
-concatList.log()
+console.log(newList0.bounds());
+console.log(newList0.findLast(2345))
+console.log(LinkedList.isSorted(newList1))
 console.log('~~~~~~~~~~~~~~~')
+console.log(newList0.clear())
+newList0.log()
 
-console.log(concatList.bounds())
+
+
