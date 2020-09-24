@@ -9,7 +9,7 @@ class Node {
 }
 
 // linked list datatype
-module.exports = class Single {
+class Single {
   constructor() {
     this.head = null;
     this.tail = null;
@@ -321,4 +321,4 @@ module.exports = class Single {
   }
 }
 
-
+export { Single }

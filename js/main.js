@@ -1,7 +1,9 @@
-const lib = require('./lib')
+import { LinkedList } from 'lib' 
 
-let newList0 = new lib.LinkedList.Single()
-let newList1 = new lib.LinkedList.Single()
+console.log(LinkedList)
+
+let newList0 = new LinkedList.Single()
+let newList1 = new LinkedList.Single()
 
 
 for(let i = 0; i < 1000; i++) {
@@ -14,7 +16,7 @@ for(let i = 0; i < 10; i++) {
 
 console.log(newList0.bounds());
 console.log(newList0.findLast(2345))
-console.log(lib.LinkedList.isSorted(newList0))
+console.log(LinkedList.isSorted(newList1))
 console.log('~~~~~~~~~~~~~~~')
 console.log(newList0.clear())
 newList0.log()

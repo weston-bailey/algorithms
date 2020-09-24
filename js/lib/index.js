@@ -1,5 +1,11 @@
-const LinkedList = require('./LinkedList');
+import { Single } from './LinkedList/Single.mjs';
+import { isSorted } from './LinkedList/isSorted.mjs'
 
-module.exports = {
+const LinkedList = {
+  Single,
+  isSorted
+}
+
+export {
   LinkedList
 }
