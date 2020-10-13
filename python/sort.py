@@ -1,32 +1,32 @@
 from time import perf_counter
-from lib import *
+from lib import util, sort_data, array_sort
 import matplotlib.pyplot as plt
 import sys
 import math
 
 # list of sort algorithms to call
 functions = [
-  bubble_sort,
-  bubble_sort_recursive,
-  insertion_sort,
-  insertion_sort_recursive,
-  bucket_sort,
-  heap_sort,
-  merge_sort,
-  quick_sort
+  array_sort.bubble_sort,
+  array_sort.bubble_sort_recursive,
+  array_sort.insertion_sort,
+  array_sort.insertion_sort_recursive,
+  array_sort.bucket_sort,
+  array_sort.heap_sort,
+  array_sort.merge_sort,
+  array_sort.quick_sort
 ]
 
 # the data to sort
-data = random_floats(10000)
+data = sort_data.random_floats(100, 1)
 # k value for bucket sort
-num_buckets = math.floor((len(data) * .5))
+num_buckets = math.floor((len(data) * .25))
 
 # force system to run higher recursive calls
 if len(data) >= 1000:
   sys.setrecursionlimit(len(data) + 1)
 
 # print lists in console
-verbose = False
+verbose = True
 # plot the times after completion
 plot = True
 
@@ -46,12 +46,12 @@ for i in range(len(functions)):
     sort = call(sort_data, num_buckets)
   else:
     sort = call(sort_data)
-  proccess_time = float_to_str(perf_counter() - start_time)
+  proccess_time = util.float_to_str(perf_counter() - start_time)
 
   times.append(float(proccess_time))
   names.append(call.__name__)
 
-  sort_test = 'List is sorted' if is_sorted(sort) else 'List is not sorted'
+  sort_test = 'List is sorted' if array_sort.is_sorted(sort) else 'List is not sorted'
 
   print(f'{sort_test} {call.__name__} completed in {proccess_time} seconds')
 
