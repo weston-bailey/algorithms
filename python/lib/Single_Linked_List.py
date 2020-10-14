@@ -32,6 +32,7 @@ class Single_Linked_List:
       i += 1
     return i
 
+  # returns node at given index
   def get(self, index):
     if self.is_empty():
       return None
@@ -45,7 +46,7 @@ class Single_Linked_List:
     if index == self.size:
       return self.tail
 
-    i = -1
+    i = 0
     current_node = self.head
     while(i < index):
       i += 1
@@ -65,3 +66,41 @@ class Single_Linked_List:
       self.tail = new_node
 
     self.size += 1
+
+  # add node to begginning of list
+  def append(self, value):
+    new_node = Node(value)
+
+    if self.is_empty(): 
+      self.head = new_node
+      self.tail = new_node
+    else:
+      new_node.next = self.head
+      self.head = new_node
+    
+    self.size += 1
+  
+  # removes last node and returns it
+  def pop(self):
+    if self.is_empty(): return None
+    # if size is zero, clear list
+    if self.size == 0:
+      popped = self.head
+      self.head = self.tail = None
+      self.size =- 1
+      return popped
+
+    current_node = self.get(self.size - 1)
+    popped = current_node.next
+    current_node.next = None
+    self.size -= 1
+    
+    # if size is zero after decrementing, the list only has one node
+    if self.size == 0:
+      self.tail = self.head
+
+    return popped
+  
+  
+
+
