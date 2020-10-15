@@ -100,7 +100,37 @@ class Single_Linked_List:
       self.tail = self.head
 
     return popped
-  
-  
+
+  # remove first node from list 
+  def shift(self):
+    if self.is_empty(): return None
+
+    shifted = self.head
+    self.head = self.head.next
+    self.size -= 1
+
+    if self.is_empty(): self.tail = None
+
+    return shifted
+
+  # removes a node at a specific index and returns it
+  def remove(self, index):
+    if self.is_empty(): return None
+    if index < 0 or index > self.size: return None
+
+    if index == 0: return self.shift()
+    if index == self.size: return self.pop()
+
+    current_node = self.get(index - 1)
+    if current_node == None: return None
+
+    removed = current_node.next
+    current_node.next = current_node.next.next
+    self.size -= 1
+
+    return removed
+
+
+
 
 
