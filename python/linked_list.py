@@ -11,28 +11,28 @@ test_list.append(12354214356)
 
 test_list.log()
 
-test_list.pop()
+test_list.remove(3)
 test_list.log()
 
-test_list.pop()
+test_list.remove(3)
 test_list.log()
 
-test_list.pop()
+test_list.remove(3)
 test_list.log()
 
-test_list.pop()
+test_list.remove(3)
 test_list.log()
 
-test_list.pop()
+test_list.remove(3)
 test_list.log()
 
-test_list.pop()
+test_list.remove(3)
 test_list.log()
 
-test_list.pop()
+test_list.remove(3)
 test_list.log()
 
-test_list.pop()
+test_list.remove(3)
 test_list.log()
 
 print(test_list.get(0))
