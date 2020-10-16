@@ -17,7 +17,10 @@ class Single_Linked_List:
   def is_empty(self):
     return self.size == -1
 
-  def log(self):
+  def log(self, *args):
+    if args:
+      for i in range(len(args)):
+        print(f'👾 {args[i]} 👾')
     current_node = self.head
     while(current_node):
       print(current_node)
@@ -129,6 +132,35 @@ class Single_Linked_List:
     self.size -= 1
 
     return removed
+
+  # replace the value of a node at a specified index
+  def replace(self, index, value):
+    replaced = None
+    if self.is_empty(): return replaced
+    if index < 0 or index > self.size: return replaced
+
+    new_node = Node(value)
+    if index == 0:
+      replaced = self.head
+      new_node.next = self.head.next
+      self.head = new_node
+      return replaced
+
+    current_node = self.get(index - 1)
+    # print(current_node)
+
+    # if index == tail
+    if index == self.size:
+      replaced = current_node.next
+      current_node.next = new_node
+      self.tail = current_node.next
+    else:
+      replaced = current_node.next
+      new_node.next = current_node.next.next
+      current_node.next = new_node
+
+    return replaced
+  
 
 
 
