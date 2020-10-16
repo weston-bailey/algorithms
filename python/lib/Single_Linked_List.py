@@ -17,6 +17,23 @@ class Single_Linked_List:
   def is_empty(self):
     return self.size == -1
 
+  # perform an operation on each node
+  # callback args (current_node, index, *args)
+  def for_each(self, _callback, *args):
+    _callback_return = None
+    current_node = self.head
+    i = 0
+    try:
+      while current_node:
+        _callback_return = _callback(current_node, i, *args)
+        current_node = current_node.next
+        i += 1
+    except Exception as e: 
+      return print('Single_Linked_List.for_each() exception: \n', e)
+
+    return _callback_return
+
+  # for testing
   def log(self, *args):
     if args:
       for i in range(len(args)):
@@ -171,8 +188,14 @@ class Single_Linked_List:
     
     return True
 
+  # returns a list of all indexes with found value
+  def find_all(self, value):
+    if self.is_empty(): return None
 
+    indexes = []
+    def callback(current_node, index):
+      if current_node.value == value: indexes.append(index)
+    
+    self.for_each(callback)
 
-
-
-
+    return indexes if len(indexes) else None
