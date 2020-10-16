@@ -161,6 +161,16 @@ class Single_Linked_List:
 
     return replaced
   
+  # clears the entire list
+  def clear(self):
+    if self.is_empty(): return True
+
+    while not self.is_empty():
+      current_node = self.shift()
+      del current_node
+    
+    return True
+
 
 
 

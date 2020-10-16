@@ -11,11 +11,11 @@ test_list.push(3)
 
 # test_list.log('before replace')
 
-# print(test_list.replace(3, 5))
-test_list.replace(4, 'replaced')
 
 
-test_list.log('after replace')
+test_list.clear()
+test_list.log('after clear')
+
 
 
 # print(test_list.get(3))
