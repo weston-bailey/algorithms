@@ -10,6 +10,6 @@ test_list.push(3)
 
 test_list.log('before for_each()')
 
-found = test_list.find_all(83)
+found = test_list.find(83)
 
 print('found', found)

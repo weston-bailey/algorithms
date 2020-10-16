@@ -188,6 +188,19 @@ class Single_Linked_List:
     
     return True
 
+  # finds first value and returns the index
+  def find(self, value):
+    if self.is_empty(): return None
+
+    i = 0
+    current_node = self.head
+    while current_node:
+      if current_node.value == value: break
+      current_node = current_node.next
+      i += 1
+
+    return i if current_node else None
+
   # returns a list of all indexes with found value
   def find_all(self, value):
     if self.is_empty(): return None
@@ -199,3 +212,5 @@ class Single_Linked_List:
     self.for_each(callback)
 
     return indexes if len(indexes) else None
+
+
