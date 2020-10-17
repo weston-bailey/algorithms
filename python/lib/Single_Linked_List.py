@@ -213,4 +213,9 @@ class Single_Linked_List:
 
     return indexes if len(indexes) else None
 
+  # returns last found index of value
+  def find_last(self, value):
+    found = self.find_all(value)
+    return found[len(found) - 1] if found else None 
+
 
