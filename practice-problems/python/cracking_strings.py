@@ -236,6 +236,34 @@ def string_compression(s: str) -> str:
   
   return compressed_s if len(compressed_s) < len(s) else s
 
-solution = string_compression('cbbbbbbbddddegb77777ik')
+# solution = string_compression('cbbbbbbbddddegb77777ik')
 
+# print(solution)
+
+'''
+1.7
+Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes, write a method to rotate the image by 90 degrees. Can you do this in place?
+'''
+
+def rotate_matrix(matrix: list) -> list:
+  pass
+'''
+1.9
+String Rotation:Assumeyou have a method isSubstringwhich checks if one word is a substring of another. Given two strings, sl and s2, write code to check if s2 is a rotation of sl using only one call to isSubstring (e.g.,"waterbottle" is a rotation of"erbottlewat").
+'''
+
+def string_rotation(s_1: str = "waterbottle", s_2: str = "erbottlewat") -> bool:
+  # make s_2 into array to rotate it easier
+  string_list = list(s_2)
+
+  # rotate the string list, checking each rotation against s_1
+  for _ in range(len(string_list)):
+    string_list = [string_list.pop()] + string_list
+    print(''.join(string_list))
+    if ''.join(string_list) == s_1:
+      return True
+
+  return False
+  
+solution = string_rotation()
 print(solution)
