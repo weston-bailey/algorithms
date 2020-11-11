@@ -181,7 +181,7 @@ def one_away(s_1: str, s_2: str) -> bool:
     # return true if only one difference was found 
     return True if num_differences <= 1 else False
 
-  # listify strings to make 
+  # listify strings to make them easier to work with
   s_1 = list(s_1)
   s_2 = list(s_2)
 
@@ -205,9 +205,37 @@ def one_away(s_1: str, s_2: str) -> bool:
         print('case 3')
         return False
 
+  # you shouldn't be here
   return 'oh no!'
 
-test_cases_1_5 = ['pale', 'ple', 'bake']
+# test_cases_1_5 = ['pale', 'ple', 'bake']
 
-solution = one_away(test_cases_1_5[0], test_cases_1_5[1])
+# solution = one_away(test_cases_1_5[0], test_cases_1_5[1])
+# print(solution)
+'''
+1.6
+String Compression: Implement a method to perform basic string compression using the counts of repeated characters. For example, the string aabcccccaaa would become a2blc5a3. If the "compressed" string would not become smaller than the original string, your method should return
+the original string. You can assume the string has only uppercase and lowercase letters (a - z).
+'''
+
+def string_compression(s: str) -> str:
+  # make hash table of character counts
+  char_table = {}
+  sorted_s = sorted(s)
+
+  for i in range(len(sorted_s)):
+    if sorted_s[i] not in char_table: 
+      char_table[sorted_s[i]] = 1
+    else: 
+      char_table[sorted_s[i]] += 1
+  
+  # make compressed string from table
+  compressed_s = ''
+  for char in char_table:
+    compressed_s = compressed_s + char + str(char_table[char])
+  
+  return compressed_s if len(compressed_s) < len(s) else s
+
+solution = string_compression('cbbbbbbbddddegb77777ik')
+
 print(solution)
