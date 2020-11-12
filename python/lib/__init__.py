@@ -56,3 +56,12 @@ class Linked_List:
 
 linked_list = Linked_List()
 linked_list.single = Single_Linked_List
+
+# tree namespace
+from lib.tree_node import Tree_Node
+
+class Graph_Tree:
+  pass
+
+graph_tree = Graph_Tree()
+graph_tree.tree_node = Tree_Node
