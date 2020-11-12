@@ -245,8 +245,41 @@ def string_compression(s: str) -> str:
 Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes, write a method to rotate the image by 90 degrees. Can you do this in place?
 '''
 
+# rotates 180 degrees
+# def rotate_matrix(matrix: list) -> list:
+#   # reverse each list
+#   for i in range(len(matrix)):
+#     matrix[i] = matrix[i][::-1]
+#   # reverse the matirx 
+#   matrix = matrix[::-1]
+#   return matrix
+
+# rotates 180 degrees
 def rotate_matrix(matrix: list) -> list:
-  pass
+  # reverse each list
+  for i in range(len(matrix)):
+    matrix[i] = matrix[i][::-1]
+  # reverse the matirx 
+  matrix = matrix[::-1]
+  return matrix
+
+matrix = [
+  [0, 0, 1, 1],
+  [0, 0, 1, 1],
+  [2, 2, 3, 3],
+  [2, 2, 3, 3]
+]
+
+for li in matrix:
+  print(li)
+
+solution = rotate_matrix(matrix)
+
+print('solution:')
+
+for li in solution:
+  print(li)
+
 '''
 1.9
 String Rotation:Assumeyou have a method isSubstringwhich checks if one word is a substring of another. Given two strings, sl and s2, write code to check if s2 is a rotation of sl using only one call to isSubstring (e.g.,"waterbottle" is a rotation of"erbottlewat").
@@ -259,11 +292,10 @@ def string_rotation(s_1: str = "waterbottle", s_2: str = "erbottlewat") -> bool:
   # rotate the string list, checking each rotation against s_1
   for _ in range(len(string_list)):
     string_list = [string_list.pop()] + string_list
-    print(''.join(string_list))
     if ''.join(string_list) == s_1:
       return True
 
   return False
   
-solution = string_rotation()
-print(solution)
+# solution = string_rotation()
+# print(solution)
