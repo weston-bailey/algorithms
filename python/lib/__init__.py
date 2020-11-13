@@ -57,8 +57,8 @@ class Linked_List:
 linked_list = Linked_List()
 linked_list.single = Single_Linked_List
 
-# tree namespace
-from lib.tree_node import Tree_Node
+# tree/graph namespace
+from lib.Tree_Node import Tree_Node
 
 class Graph_Tree:
   pass
