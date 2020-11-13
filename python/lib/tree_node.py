@@ -6,22 +6,20 @@ class Tree_Node:
     self.value = value
   
   # smaller values are moved left and greater values are moved right
-  def insert_node_sorted(self, value):
+  def insert_node(self, value):
     if self.value:
       if value < self.value:
         if self.left is None: 
           self.left = Tree_Node(value)
         else:
-          self.left.insert_node_sorted(value)
+          self.left.insert_node(value)
       else:
         if self.right is None:
           self.right = Tree_Node(value)
         else:
-          self.right.insert_node_sorted(value)
+          self.right.insert_node(value)
     else:
       self.value = value
-
-
 
   def print_values(self):
     if self.left:
